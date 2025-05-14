@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text Style</title>
+  <style>
+    #PAR {
+      font-family: 'Times New Roman';
+      font-size: 11pt;
+      width: 550px;
+      border: 2px solid black;
+      padding: 10px;
+      text-align: left;
+    }
+
+    #Text {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    #Text td {
+      vertical-align: top;
+      padding: 10px;
+      font-family: 'Times New Roman';
+      font-size: 11pt;
+    }
+  </style>
+</head>
+<body>
+
+  <p id="PAR">
+    Here is a paragraph of text that has various alignment characteristics that can be changed dynamically. Click the radio buttons below to view combinations of text style settings.
+  </p>
+
+  <table id="Text" border="1">
+    <tr>
+      <td>
+        <b>fontFamily</b><br>
+        <label><input type="radio" name="fontFamily" value="arial" checked> arial</label><br>
+        <label><input type="radio" name="fontFamily" value="courier"> courier</label><br>
+        <label><input type="radio" name="fontFamily" value="georgia"> georgia</label><br>
+        <label><input type="radio" name="fontFamily" value="impact"> impact</label><br>
+        <label><input type="radio" name="fontFamily" value="times new roman"> times new roman</label><br>
+        <label><input type="radio" name="fontFamily" value="verdana"> verdana</label><br>
+      </td>
+      <td>
+        <b>textAlign</b><br>
+        <label><input type="radio" name="textAlign" value="left" checked> left</label><br>
+        <label><input type="radio" name="textAlign" value="center"> center</label><br>
+        <label><input type="radio" name="textAlign" value="right"> right</label><br>
+        <label><input type="radio" name="textAlign" value="justify"> justify</label><br>
+      </td>
+      <td>
+        <b>lineHeight</b><br>
+        <label><input type="radio" name="lineHeight" value="normal" checked> normal</label><br>
+        <label><input type="radio" name="lineHeight" value="10px"> 10px</label><br>
+        <label><input type="radio" name="lineHeight" value="15px"> 15px</label><br>
+        <label><input type="radio" name="lineHeight" value="1.5"> 1.5</label><br>
+      </td>
+      <td>
+        <b>letterSpacing</b><br>
+        <label><input type="radio" name="letterSpacing" value="normal" checked> normal</label><br>
+        <label><input type="radio" name="letterSpacing" value="-1px"> -1px</label><br>
+        <label><input type="radio" name="letterSpacing" value="2px"> 2px</label><br>
+        <label><input type="radio" name="letterSpacing" value="3px"> 3px</label><br>
+      </td>
+      <td>
+        <b>textIndent</b><br>
+        <label><input type="radio" name="textIndent" value="0px" checked> 0px</label><br>
+        <label><input type="radio" name="textIndent" value="5px"> 5px</label><br>
+        <label><input type="radio" name="textIndent" value="15px"> 15px</label><br>
+        <label><input type="radio" name="textIndent" value="25px"> 25px</label><br>
+      </td>
+      <td>
+        <b>textTransform</b><br>
+        <label><input type="radio" name="textTransform" value="none" checked> none</label><br>
+        <label><input type="radio" name="textTransform" value="capitalize"> capitalize</label><br>
+        <label><input type="radio" name="textTransform" value="uppercase"> uppercase</label><br>
+        <label><input type="radio" name="textTransform" value="lowercase"> lowercase</label><br>
+      </td>
+      <td>
+        <b>textDecoration</b><br>
+        <label><input type="radio" name="textDecoration" value="none" checked> none</label><br>
+        <label><input type="radio" name="textDecoration" value="line-through"> line-through</label><br>
+        <label><input type="radio" name="textDecoration" value="overline"> overline</label><br>
+        <label><input type="radio" name="textDecoration" value="underline"> underline</label><br>
+      </td>
+      <td>
+        <b>borderStyle</b><br>
+        <label><input type="radio" name="borderStyle" value="none" checked> none</label><br>
+        <label><input type="radio" name="borderStyle" value="dotted"> dotted</label><br>
+        <label><input type="radio" name="borderStyle" value="dashed"> dashed</label><br>
+        <label><input type="radio" name="borderStyle" value="solid"> solid</label><br>
+        <label><input type="radio" name="borderStyle" value="double"> double</label><br>
+      </td>
+      <td>
+        <b>borderColor</b><br>
+        <label><input type="radio" name="borderColor" value="black" checked> black</label><br>
+        <label><input type="radio" name="borderColor" value="red"> red</label><br>
+        <label><input type="radio" name="borderColor" value="blue"> blue</label><br>
+        <label><input type="radio" name="borderColor" value="green"> green</label><br>
+        <label><input type="radio" name="borderColor" value="yellow"> yellow</label><br>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+  var paragraph = document.getElementById('PAR');
+  var styles = ['fontFamily', 'textAlign', 'lineHeight', 'letterSpacing', 'textIndent', 'textTransform', 'textDecoration', 'borderStyle', 'borderColor'];
+
+  styles.forEach(function (style) {
+    var radios = document.getElementsByName(style);//interacive (choose what i want )
+    for (var i = 0; i < radios.length; i++) {
+      radios[i].addEventListener('change', function () {
+        if (style === 'borderStyle' || style === 'borderColor') {
+          var currentBorderStyle = getCheckedValue('borderStyle');
+          var currentBorderColor = getCheckedValue('borderColor');
+          paragraph.style.border = '2px ' + currentBorderStyle + ' ' + currentBorderColor;
+        } else {
+          paragraph.style[style] = this.value;
+        }
+      });
+    }
+  });
+
+  function getCheckedValue(groupName) {
+    var options = document.getElementsByName(groupName);
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].checked) {
+        return options[i].value;
+      }
+    }
+    return '';
+  }
+</script>
+
+</body>
+</html>
